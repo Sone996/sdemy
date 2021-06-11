@@ -1,15 +1,42 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+//stores user
+import userStore from './user/userStore';
+// END :: stores user
+// stores admin
+import adminStore from './admin/adminStore';
+// END :: stores admin
 
-Vue.use(Vuex)
+// general
+import authStore from './authStore';
+import appStore from './appStore';
+// END :: general
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+Vue.use(Vuex);
+
+let storeInstance = new Vuex.Store({
+	modules: {
+		userStore,
+		adminStore,
+		authStore,
+		appStore
+	},
+	state: {
+	},
+
+	getters: {
+		getState: (state) => (prop) => {
+			return state[prop];
+		  },
+	},
+
+	mutations: {
+		setState: (state, { prop, value }) => {
+			state[prop] = value;
+		  },
+	},
+
+	actions: {},
+});
+
+export default storeInstance;

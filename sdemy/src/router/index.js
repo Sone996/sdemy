@@ -1,31 +1,62 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+//import { ROLES } from "../constants/constants";
+import { routerService } from './router.service'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/About.vue')
-    }
-  }
-]
+	{
+		path: "/",
+		component: () =>
+			import(/* webpackChunkName: "app-layout" */ "@/layouts/AppLayout"),
+		children: [
+			{
+				path: "/",
+				name: "dashboard",
+				//beforeEnter: routerService.routerGuards,
+				// meta: {
+				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
+				// },
+				component: () =>
+					import(/* webpackChunkName: "user-home" */ "@/views/userViews/UserHome"),
+			},
+
+		],
+	},
+
+	{
+		path: "/login",
+		name: "login",
+		meta: {
+			// requiresLoggedUser: false,
+			//allowedRoles: Object.values(ROLES),
+		},
+		component: () => import(/* webpackChunkName: "login" */ "@/views/Login"),
+	},
+	{
+		path: "/error",
+		alias: "/*",
+		name: "error",
+		meta: {
+			//allowedRoles: Object.values(ROLES),
+		},
+		component: () =>
+			import(/* webpackChunkName: "error" */ "@/views/ErrorPage"),
+	},
+];
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+	base: process.env.BASE_URL,
+	routes,
+	mode: "history",
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition;
+		} else {
+			return { x: 0, y: 0 };
+		}
+	},
+});
 
-export default router
+export default router;
