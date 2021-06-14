@@ -1,10 +1,10 @@
 <template>
-  <div class="user-dashboard">scscscscscccsc</div>
+  <div class="member-profile">member profile</div>
 </template>
 
 <script>
   export default {
-    name: 'user-dashboard',
+    name: 'member-profile',
     components: {},
     data() {
       return {};

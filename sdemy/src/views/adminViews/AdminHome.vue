@@ -1,7 +1,7 @@
 <template>
-	<div class="user-home flex-col flex w-full">
+	<div class="admin-home flex-col flex w-full">
 		<div class="flex border-b py-4 px-4 w-full text-xl font-bold">
-			<span>Courses List</span>
+			<span>My Courses</span>
 		</div>
 		<div class="flex w-full justify-center mt-16">
 			<simple-table :model='model' :titles='titles'></simple-table>
@@ -12,7 +12,7 @@
 <script>
 import simpleTable from '../../components/shared/SimpleTable';
 export default {
-	name: "user-home",
+	name: "admin-home",
 	components: {
 		simpleTable,
 	},
@@ -31,7 +31,7 @@ export default {
 			titles: ['Name', 'Title', 'Role', 'Email', 'Edit', 'Delete'],
 		};
 	},
-	mounted() {},
+    mounted() {},
 	methods: {},
 	computed: {},
 	watch: {},

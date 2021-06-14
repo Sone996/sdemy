@@ -11,8 +11,9 @@ const routes = [
 		component: () =>
 			import(/* webpackChunkName: "app-layout" */ "@/layouts/AppLayout"),
 		children: [
+			// user pages
 			{
-				path: "/",
+				path: "/home",
 				name: "dashboard",
 				//beforeEnter: routerService.routerGuards,
 				// meta: {
@@ -21,6 +22,52 @@ const routes = [
 				component: () =>
 					import(/* webpackChunkName: "user-home" */ "@/views/userViews/UserHome"),
 			},
+			{
+				path: "/member-profile",
+				name: "member-profile",
+				//beforeEnter: routerService.routerGuards,
+				// meta: {
+				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
+				// },
+				component: () =>
+					import(/* webpackChunkName: "member-profile" */ "@/views/userViews/UserProfile"),
+			},
+			// END :: user pages
+
+			// admin pages
+			{
+				path: "/admin-home",
+				name: "admin-dashboard",
+				//beforeEnter: routerService.routerGuards,
+				// meta: {
+				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
+				// },
+				component: () =>
+					import(/* webpackChunkName: "admin-home" */ "@/views/adminViews/AdminHome"),
+			},
+			{
+				path: "/member-list",
+				name: "member-list",
+				//beforeEnter: routerService.routerGuards,
+				// meta: {
+				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
+				// },
+				component: () =>
+					import(/* webpackChunkName: "member-list" */ "@/views/adminViews/MemberList"),
+			},
+			{
+				path: "/professor-profile",
+				name: "professor-profile",
+				//beforeEnter: routerService.routerGuards,
+				// meta: {
+				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
+				// },
+				component: () =>
+					import(/* webpackChunkName: "professor-profile" */ "@/views/adminViews/ProfessorProfile"),
+			},
+			// END :: admin pages
+			// shared pages
+			// END :: shared pages
 
 		],
 	},

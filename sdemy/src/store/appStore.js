@@ -4,6 +4,7 @@ import { userService } from '../modules/app/app.service'
 const appStore = {
 	namespaced: true,
 	state: {
+		loader: false,
 	},
 	getters: {
 		getState: (state) => (prop) => {

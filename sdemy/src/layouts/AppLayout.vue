@@ -1,18 +1,24 @@
 <template>
-	<div class="app-layout flex h-full w-full">
-		<div class="flex-col h-full w-2/12 bg-black"></div>
-		<div class="flex-col h-full w-10/12">
-			<user-dashboard></user-dashboard>
+	<div class="flex w-full h-full">
+		<div class="flex flex-col h-full bg-gray-500 w-2/12">
+			<div class="flex p-16">
+				<img src="../assets/images/factoryww.png" alt="">
+			</div>
+            <div class="flex flex-col text-white font-bold text-lg">
+                <span class="my-2">Profile</span>
+                <span class="my-2">Home</span>
+            </div>
+        </div>
+		<div class="flex w-full">
+			<router-view />
 		</div>
 	</div>
 </template>
 
 <script>
-import UserDashboard from '../components/userComponents/UserDashboard';
 export default {
 	name: "app-layout",
 	components: {
-		UserDashboard,
 	},
 	data() {
 		return {};
