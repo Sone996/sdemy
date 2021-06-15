@@ -1,8 +1,12 @@
 import { api } from '../../api/api';
 const ROUTES = {
+    LOGIN: '/login',
 };
 
-class MemberProfileRepo {
+class AuthRepo {
+    login(data) {
+        return api.post(ROUTES.LOGIN, data)
+    }
 }
 
-export const memberProfileRepo = new MemberProfileRepo();
+export const authRepo = new AuthRepo();

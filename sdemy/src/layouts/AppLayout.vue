@@ -7,6 +7,7 @@
             <div class="flex flex-col text-white font-bold text-lg">
                 <span class="my-2">Profile</span>
                 <span class="my-2">Home</span>
+				<span @click="logout()">Logout</span>
             </div>
         </div>
 		<div class="flex w-full">
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import { TOKEN_LS_NAME } from "@/constants/constants";
 export default {
 	name: "app-layout",
 	components: {
@@ -23,7 +25,16 @@ export default {
 	data() {
 		return {};
 	},
-	methods: {},
+	methods: {
+		logout() {
+			this.$store.dispatch('authStore/logout').then((res) => {
+				localStorage.removeItem(TOKEN_LS_NAME);
+            	this.$router.push(res)
+			}).catch((err) => {
+				console.log(err);
+			});
+		}
+	},
 	computed: {},
 	watch: {},
 };

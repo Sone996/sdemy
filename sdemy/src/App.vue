@@ -17,6 +17,7 @@
 import ModalMixin from './mixins/ModalMixin';
 import loader from './components/shared/Lodaer';
 import notificationModal from './components/modals/NotificationModal';
+import { TOKEN_LS_NAME } from "@/constants/constants";
 export default {
 	name: "app",
 	components: {
@@ -27,7 +28,6 @@ export default {
 		return {};
 	},
 	mounted(){
-		//console.log(process)
 		//console.log('processss', process.env.VUE_APP_API_PATH)
 	},
 	mixins: [ModalMixin],
@@ -61,8 +61,11 @@ export default {
             return this.$store.getters['appStore/getState']('activeOverlay');
         },
         getModalObj() {
-        return this.$store.getters['appStore/getState']('modalData');
-      },
+        	return this.$store.getters['appStore/getState']('modalData');
+    	},
+		loggedUser() {
+            return this.$store.getters["authStore/getState"]("loggedUser");
+        },
 	},
 	watch: {},
 };
