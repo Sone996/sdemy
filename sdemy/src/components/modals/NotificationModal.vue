@@ -51,11 +51,23 @@ export default {
   	animation-timing-function: linear;
 }
 @keyframes comein {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+	  opacity: 0;
+	  transform: translateX(100%); 
+	  }
+  to {
+	  opacity: 1;
+	  transform: translateX(0);
+	  }
 }
 @keyframes comeout {
-  from {opacity: 1;}
-  to {opacity: 0;}
+  from {
+	  opacity: 1;
+	  transform: translateX(0);
+	  }
+  to {
+	  opacity: 0;
+	  transform: translateX(100%);
+	  }
 }
 </style>

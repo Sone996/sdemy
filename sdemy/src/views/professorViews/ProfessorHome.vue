@@ -1,5 +1,5 @@
 <template>
-	<div class="admin-home flex-col flex w-full">
+	<div class="professor-home flex-col flex w-full">
 		<div class="flex border-b py-4 px-4 w-full text-xl font-bold">
 			<span>My Courses</span>
 		</div>
@@ -12,7 +12,7 @@
 <script>
 import simpleTable from '../../components/shared/SimpleTable';
 export default {
-	name: "admin-home",
+	name: "professor-home",
 	components: {
 		simpleTable,
 	},

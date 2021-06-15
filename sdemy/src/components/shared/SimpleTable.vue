@@ -16,10 +16,10 @@
 							:class="index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-300'">
 							<td v-for="(col, index) in modelCol()" :key="index" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item[modelCol()[index]] }}</td>
 							<td class=" px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <span class="button bg-green-300">Edit</span>
+                                <span class="button bg-darkGreen">Edit</span>
                             </td>
                             <td class=" px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <span class="button bg-red-700">Delete</span>
+                                <span class="button bg-darkRed">Delete</span>
                             </td>
 						</tr>
 					</tbody>

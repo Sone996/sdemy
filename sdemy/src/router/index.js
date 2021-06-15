@@ -34,16 +34,16 @@ const routes = [
 			},
 			// END :: user pages
 
-			// admin pages
+			// professor pages
 			{
-				path: "/admin-home",
-				name: "admin-dashboard",
+				path: "/professor-home",
+				name: "professor-dashboard",
 				//beforeEnter: routerService.routerGuards,
 				// meta: {
 				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
 				// },
 				component: () =>
-					import(/* webpackChunkName: "admin-home" */ "@/views/adminViews/AdminHome"),
+					import(/* webpackChunkName: "professor-home" */ "@/views/professorViews/ProfessorHome"),
 			},
 			{
 				path: "/member-list",
@@ -53,7 +53,7 @@ const routes = [
 				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
 				// },
 				component: () =>
-					import(/* webpackChunkName: "member-list" */ "@/views/adminViews/MemberList"),
+					import(/* webpackChunkName: "member-list" */ "@/views/professorViews/MemberList"),
 			},
 			{
 				path: "/professor-profile",
@@ -63,9 +63,9 @@ const routes = [
 				//   allowedRoles: [ROLES.generic, ROLES.gymManager],
 				// },
 				component: () =>
-					import(/* webpackChunkName: "professor-profile" */ "@/views/adminViews/ProfessorProfile"),
+					import(/* webpackChunkName: "professor-profile" */ "@/views/professorViews/ProfessorProfile"),
 			},
-			// END :: admin pages
+			// END :: professor pages
 			// shared pages
 			// END :: shared pages
 
