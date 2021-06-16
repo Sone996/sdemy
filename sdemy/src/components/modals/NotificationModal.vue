@@ -1,8 +1,12 @@
 <template>
-	<div id="notification-modal" class="notification-modal w-2/12 flex flex-row absolute text-tiny felx items-center justify-center goIn"
+	<div id="notification-modal" class="notification-modal rounded-lg w-2/12 flex flex-row absolute text-tiny felx items-center justify-center goIn"
 		:class="model.errMsg ? 'bg-red' : 'bg-green'"
 	>
-		<span :class="model.errMsg ? 'text-darkRed' : 'text-darkGreen'">xxkxkxkxkxkxxkxkxk</span>
+		<div class="flex items-center justify-between w-full px-8">
+			<span :class="model.errMsg ? 'text-darkRed' : 'text-darkGreen'">{{model.errMsg ? model.errMsg : model.successMsg}}</span>
+			<i v-if="model.successMsg" class="fa fa-check text-darkGreen text-3xl" aria-hidden="true"></i>
+			<i v-else class="fa fa-exclamation-triangle text-darkRed text-3xl" aria-hidden="true"></i>
+		</div>
 	</div>
 </template>
 

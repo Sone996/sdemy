@@ -55,7 +55,9 @@
 </template>
 
 <script>
-//import { notificationMsg } from "@/services/BaseService";
+import ModalMixin from '../mixins/ModalMixin';
+import { notificationMsg } from "../services/BaseServices";
+import omit from "lodash/omit";
 export default {
 	data() {
 		return {
@@ -77,16 +79,25 @@ export default {
 			]
 		};
 	},
+	mixins: [ModalMixin],
 	computed: {
 	},
 	methods: {
 		loginAction() {
+			this.$store.commit('appStore/setState', {
+				prop: 'loader',
+				value: true
+			})
 			this.$store.dispatch('authStore/login', this.login)
 			.then((res) => {
-				if(res.role === 'teacher') {
+				this.openModal('notification-modal', {
+					errMsg: null,
+					successMsg: notificationMsg(res, 'lOGIN_SUCCESS'),
+				});
+				if(res.data.role === 'teacher') {
 					this.$router.push('/professor-home');
 					return;
-				} if(res.role === 'student') {
+				} if(res.data.role === 'student') {
 					this.$router.push('/home');
 					return;
 				} else {
@@ -94,21 +105,43 @@ export default {
 				}
 			})
 			.catch((err) => {
-				console.log('nisam uspeo: ',err);
+				this.$store.commit('appStore/setState', {
+						prop: 'loader',
+						value: false
+					})
+				this.openModal('notification-modal', {
+					errMsg: notificationMsg(err),
+					successMsg: null,
+				});
 			})
 		},
 		registerForm() {
 			this.register = !this.register;
 		},
 		registerAction() {
+			this.$store.commit('appStore/setState', {
+				prop: 'loader',
+				value: true
+			})
 			this.login.role = this.role.value;
 			this.$store.dispatch('authStore/register', this.login)
 			.then((res) => {
-				console.log(res);
-				//this.loginAction();
+				this.login = omit(this.login, ['name', 'surname', 'role']);
+				this.openModal('notification-modal', {
+					errMsg: null,
+					successMsg: notificationMsg(res, 'REGISTER_SUCCESS'),
+				});
+				this.loginAction();
 			})
 			.catch((err) => {
-				console.log('nisam uspeo: ',err);
+				this.$store.commit('appStore/setState', {
+						prop: 'loader',
+						value: false
+					})
+				this.openModal('notification-modal', {
+					errMsg: notificationMsg(err),
+					successMsg: null,
+				});
 			})
 		}
 	},

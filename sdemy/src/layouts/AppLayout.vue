@@ -35,6 +35,12 @@ export default {
 			this.$store.commit('authStore/setLoggedUser', data);
 		}
 	},
+	mounted(){
+		this.$store.commit('appStore/setState', {
+				prop: 'loader',
+				value: false
+			})
+	},
 	methods: {
 		logout() {
 			this.$store.dispatch('authStore/logout').then((res) => {

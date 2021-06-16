@@ -31,9 +31,8 @@ const authStore = {
 				const account = await authService.login(formData);
 				commit("setLoggedUser", account.data);
 				//session-id ako bude za sad je ceo user kako bih imao podatke o logovanom
-				console.log(account.data)
 				localStorage.setItem(TOKEN_LS_NAME, JSON.stringify(account.data));
-				return Promise.resolve(account.data);
+				return Promise.resolve(account);
 			}
 			catch(error){
 				return Promise.reject(error);
@@ -49,8 +48,8 @@ const authStore = {
 			try{
 				let formData = { ...payload };
 				formData.password = SHA512(formData.password).toString()
-				const register = await authService.register(formData);
-				Promise.resolve(register);
+				const res = await authService.register(formData);
+				return Promise.resolve(res);
 			} catch(error) {
 				return Promise.reject(error);
 			}
