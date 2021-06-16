@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { authService } from '../modules/auth/auth.service'
 import { TOKEN_LS_NAME } from "../constants/constants";
+import SHA512 from "crypto-js/sha512";
 
 const authStore = {
 	namespaced: true,
@@ -25,11 +26,13 @@ const authStore = {
 	actions: {
 		async login({commit}, payload) {
 			try{
-				// let formData = { ...payload };
-				// formData.password = SHA512(formData.password).toString()
-				const account = await authService.login(payload);
+				let formData = { ...payload };
+				formData.password = SHA512(formData.password).toString()
+				const account = await authService.login(formData);
 				commit("setLoggedUser", account.data);
-				localStorage.setItem(TOKEN_LS_NAME, account.data.role);  //session-id ako bude
+				//session-id ako bude za sad je ceo user kako bih imao podatke o logovanom
+				console.log(account.data)
+				localStorage.setItem(TOKEN_LS_NAME, JSON.stringify(account.data));
 				return Promise.resolve(account.data);
 			}
 			catch(error){
@@ -41,7 +44,17 @@ const authStore = {
 				loggedUser: null
 			});
 			return '/login';
-		  },
+		},
+		async register({}, payload) {
+			try{
+				let formData = { ...payload };
+				formData.password = SHA512(formData.password).toString()
+				const register = await authService.register(formData);
+				Promise.resolve(register);
+			} catch(error) {
+				return Promise.reject(error);
+			}
+		},
 	}
 };
 

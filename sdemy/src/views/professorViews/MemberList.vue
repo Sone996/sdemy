@@ -1,7 +1,7 @@
 <template>
 	<div class="member-list flex-col flex w-full">
 		<div class="flex border-b py-4 px-4 w-full text-xl font-bold">
-			<span>My Trainees</span>
+			<span>My Students</span>
 		</div>
 		<div class="flex w-full justify-center mt-16">
 			<simple-table :model='model' :titles='titles'></simple-table>

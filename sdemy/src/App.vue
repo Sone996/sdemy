@@ -63,9 +63,6 @@ export default {
         getModalObj() {
         	return this.$store.getters['appStore/getState']('modalData');
     	},
-		loggedUser() {
-            return this.$store.getters["authStore/getState"]("loggedUser");
-        },
 	},
 	watch: {},
 };

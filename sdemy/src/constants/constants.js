@@ -7,32 +7,17 @@ export const PERMISSION_ERRORS = [
 ];
 
 export const ROLES = {
-  generic: "generic_login",
-  frontDesk: "front_desk",
-  gymManager: "gym_manager",
-  accounting: "accounting",
-  admin: "admin",
+  student: "student",
+  professor: "teacher",
 };
 
 export const usersRoles = [
 	{
-		name: "Generički login",
+		name: "Student",
 		value: ROLES.generic,
 	},
 	{
-		name: "Pult",
+		name: "Professor",
 		value: ROLES.frontDesk,
-	},
-	{
-		name: "Menadžer",
-		value: ROLES.gymManager,
-	},
-	{
-		name: "Računovodstvo",
-		value: ROLES.accounting,
-	},
-	{
-		name: "Admin",
-		value: ROLES.admin,
 	},
 ];

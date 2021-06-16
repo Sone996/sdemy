@@ -6,11 +6,11 @@
 			</div>
 			<div class="flex flex-col justify-center mt-8">
 				<span>Email</span>
-				<input class="input" type="text" v-model="login.email">
+				<input class="input" type="text" autocomplete="off" v-model="login.email">
 			</div>
 			<div class="flex flex-col justify-center mt-4">
 				<span>Password</span>
-				<input class="input" type="password" v-model="login.password">
+				<input class="input" type="password" autocomplete="new-password" v-model="login.password">
 			</div>
 			<div class="flex mt-4 justify-between">
 				<div class="button bg-blue-500 w-1/3" @click="loginAction()">Login</div>
@@ -23,19 +23,28 @@
 				</div>
 				<div class="flex flex-col justify-center mt-8">
 					<span>First Name</span>
-					<input class="input" type="text" v-model="login.nmae">
+					<input class="input" type="text" autocomplete="off" v-model="login.name">
 				</div>
 				<div class="flex flex-col justify-center mt-8">
 					<span>Last Name</span>
-					<input class="input" type="text" v-model="login.surename">
+					<input class="input" type="text" autocomplete="off" v-model="login.surname">
 				</div>
 				<div class="flex flex-col justify-center mt-8">
 					<span>Email</span>
-					<input class="input" type="text" v-model="login.email">
+					<input class="input" type="text" autocomplete="off" v-model="login.email">
 				</div>
-				<div class="flex flex-col justify-center mt-4">
+				<div class="flex flex-col justify-center mt-8">
 					<span>Password</span>
-					<input class="input" type="password" v-model="login.password">
+					<input class="input" type="password" autocomplete="new-password" v-model="login.password">
+				</div>
+				<div class="flex mt-8">
+					<v-select
+						label="name"
+            			class="w-1/4"
+            			:clearable="false"
+            			:options="roleOptions"
+            			v-model="role"
+            			/>
 				</div>
 				<div class="flex mt-4 justify-between">
 					<div class="button bg-darkRed w-1/3" @click="registerForm()">Go Back</div>
@@ -54,7 +63,18 @@ export default {
 				email: "",
 				password: "",
 			},
+			role: null,
 			register: false,
+			roleOptions: [
+				{
+					name: "Teacher",
+					value: 'teacher',
+				},
+				{
+					name: "Student",
+					value: 'student',
+				},
+			]
 		};
 	},
 	computed: {
@@ -81,7 +101,15 @@ export default {
 			this.register = !this.register;
 		},
 		registerAction() {
-			console.log(this.login);
+			this.login.role = this.role.value;
+			this.$store.dispatch('authStore/register', this.login)
+			.then((res) => {
+				console.log(res);
+				//this.loginAction();
+			})
+			.catch((err) => {
+				console.log('nisam uspeo: ',err);
+			})
 		}
 	},
 	mounted() {},
