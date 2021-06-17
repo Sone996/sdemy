@@ -7,8 +7,8 @@
             <div class="flex flex-col text-white font-bold text-lg">
                 <span class="my-2 cursor-pointer" @click="goToHome()">Home</span>
                 <span class="my-2 cursor-pointer" @click="goToProfile()">Profile</span>
-				<span v-if="loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="myStudents()">My Students</span>
-				<span v-if="loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="newCourse()">New Course</span>
+				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="myStudents()">My Students</span>
+				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="newCourse()">New Course</span>
 				<span class="my-2 cursor-pointer" @click="logout()">Logout</span>
 				<!-- <span>{{loggedUser.role}}</span> -->
             </div>
@@ -28,14 +28,10 @@ export default {
 	data() {
 		return {};
 	},
-	created(){
-		// to set user data after refresh
-		if(TOKEN_LS_NAME && !this.loggedUser) {
-			let data = JSON.parse(localStorage.getItem(TOKEN_LS_NAME));
-			this.$store.commit('authStore/setLoggedUser', data);
-		}
-	},
 	mounted(){
+		if(!localStorage.getItem(TOKEN_LS_NAME)) {
+			this.$router.push('/login');
+		} 
 		this.$store.commit('appStore/setState', {
 				prop: 'loader',
 				value: false

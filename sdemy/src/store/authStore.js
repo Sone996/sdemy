@@ -31,10 +31,21 @@ const authStore = {
 				const account = await authService.login(formData);
 				commit("setLoggedUser", account.data);
 				//session-id ako bude za sad je ceo user kako bih imao podatke o logovanom
-				localStorage.setItem(TOKEN_LS_NAME, JSON.stringify(account.data));
+				localStorage.setItem(TOKEN_LS_NAME, account.data['session-id']);
 				return Promise.resolve(account);
 			}
 			catch(error){
+				return Promise.reject(error);
+			}
+		},
+		async fetchActiveAccount({ commit }) {
+			try {
+				const account = await authService.fetchActiveAccount();
+				commit('setState', {
+					loggedUser: account.data
+				});
+				return account
+			} catch (error) {
 				return Promise.reject(error);
 			}
 		},

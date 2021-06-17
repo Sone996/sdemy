@@ -2,6 +2,7 @@ import { api } from '../../api/api';
 const ROUTES = {
     LOGIN: '/login',
     REGISTER: '/register',
+    FETCH_ACCOUNT: '/user/session',
 };
 
 class AuthRepo {
@@ -11,6 +12,10 @@ class AuthRepo {
 
     register(data) {
         return api.post(ROUTES.REGISTER, data);
+    }
+
+    fetchActiveAccount() {
+        return api.get(ROUTES.FETCH_ACCOUNT)
     }
 }
 

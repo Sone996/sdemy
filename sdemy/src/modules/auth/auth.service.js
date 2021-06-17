@@ -9,6 +9,10 @@ class AuthService {
     register(data) {
         return authRepo.register(data);
     }
+
+    fetchActiveAccount() {
+        return authRepo.fetchActiveAccount();
+    }
 }
 
 export const authService = new AuthService();
