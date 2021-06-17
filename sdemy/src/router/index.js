@@ -77,6 +77,16 @@ const routes = [
 			},
 			// END :: professor pages
 			// shared pages
+			{
+				path: "/course",
+				name: "course",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLES.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "course" */ "@/views/shared/SingleCourse"),
+			},
 			// END :: shared pages
 
 		],
