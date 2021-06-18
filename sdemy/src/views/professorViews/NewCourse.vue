@@ -12,6 +12,9 @@
 				<span>Price</span>
 				<input class="input" type="number" autocomplete="off" v-model="form.price">
 			</div>
+			<div class="flex flex-col mt-8">
+				<textarea v-model="form.description" class="border resize-none w-full rounded p-3" rows="10" placeholder="Description"></textarea>
+			</div>
 			<div class="flex mt-8 w-1/4">
 				<div @click="createCourse()" class="button bg-blue-500">Create</div>
 			</div>
@@ -30,6 +33,7 @@ export default {
 			form: {
 				name: null,
 				price: null,
+				description: null,
 			},
 		};
 	},

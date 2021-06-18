@@ -1,21 +1,48 @@
 <template>
-<div class="course flex flex-col">
-    <div class="flex border-b py-4 px-4 w-full text-xl font-bold">
-        <span>{{course ? course.name : ''}}</span>
+<div class="course flex flex-col w-full">
+    <div class="flex items-start py-4 px-4 border-r text-xl font-bold h-1/2 border-b">
+        <div class="flex flex-col w-1/3 items-start">
+            <span>Name: {{course ? course.name : ''}}</span>
+            <span>Price: {{course ? course.price : ''}}</span>
+        </div>
+        <div class="flex w-3/4 border whitespace-pre-line h-full overflow-y-auto mb-4">
+            <span>{{ course ? course.description : "" }}</span>
+        </div>
+    </div>
+    <div class="flex flex-col h-1/2">
+        <!-- set this for admin view, for user should be comments and make components -->
+        <span>Students on this course</span>
+        <simple-table :model='model' :titles='titles'></simple-table>
     </div>
 </div>
 </template>
 
 <script>
 import ModalMixin from '../../mixins/ModalMixin';
+import simpleTable from '../../components/shared/SimpleTable.vue';
+
 import {
     notificationMsg
 } from "../../services/BaseServices";
 export default {
     name: 'course',
-    components: {},
+    components: {
+        simpleTable,
+    },
     data() {
-        return {};
+        return {
+            model: [
+                { name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
+                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
+				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
+                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
+				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
+                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
+				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
+                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
+            ],
+			titles: ['Name', 'Title', 'Role', 'Email', 'Edit', 'Delete'],
+        };
     },
     mixins: [ModalMixin],
     mounted() {
