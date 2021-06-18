@@ -82,10 +82,20 @@ const routes = [
 				name: "course",
 				beforeEnter: routerService.routerGuards,
 				meta: {
-				  allowedRoles: [ROLES.professor],
+				  allowedRoles: [ROLES.professor, ROLES.student],
 				},
 				component: () =>
 					import(/* webpackChunkName: "course" */ "@/views/shared/SingleCourse"),
+			},
+			{
+				path: "/course-list",
+				name: "course-list",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLES.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "courseList" */ "@/views/shared/CourseList"),
 			},
 			// END :: shared pages
 

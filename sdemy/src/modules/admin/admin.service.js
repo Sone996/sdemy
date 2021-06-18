@@ -9,6 +9,14 @@ class AdminService {
     fetchSingleCours(data) {
         return adminRepo.fetchSingleCours(data);
     }
+
+    fetchAllCourses() {
+        return adminRepo.fetchAllCourses();
+    }
+
+    fetchMyCourses(id) {
+        return adminRepo.fetchMyCourses(id);
+    }
 }
 
 export const adminService = new AdminService();

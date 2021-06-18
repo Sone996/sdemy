@@ -8,19 +8,21 @@
 						<tr>
 							<th 
                                 v-for="(item, index) in titles" :key="index" scope="col"
-                                class=" px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{item}}</th>
+                                class="px-6 py-3 text-left text-xs text-center font-medium text-gray-500 uppercase tracking-wider">{{item}}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(item, index) in model" :key="index"
-							:class="index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-300'">
+							:class="index % 2 === 0 ? 'bg-gray-100 hover:bg-darkGreen' : 'bg-gray-300 hover:bg-darkGreen'"
+                            @click="$emit('singleView', item)"
+                        >
 							<td v-for="(col, index) in modelCol()" :key="index" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item[modelCol()[index]] }}</td>
-							<td class=" px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+							<!-- <td class=" px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <span class="button bg-darkGreen">Edit</span>
                             </td>
                             <td class=" px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <span class="button bg-darkRed">Delete</span>
-                            </td>
+                            </td> -->
 						</tr>
 					</tbody>
 				</table>
@@ -39,15 +41,17 @@
     },
     props: {
         titles: {
-            type: Array,
+            type: Array | null,
             required: true,
         },
         model: {
-            type: Array,
+            type: Array | null,
             required: true,
         }
     },
-    mounted() {},
+    mounted() {
+        //console.log(this.model)
+    },
     methods: {
         modelCol() {
             let len = Object.keys(this.model[0]).length;
@@ -60,7 +64,11 @@
                 }
             }
             return colName;
-        }
+        },
+        singleView() {
+            console.log('klik')
+            // console.log(item);
+        },
     },
     computed: {
     },

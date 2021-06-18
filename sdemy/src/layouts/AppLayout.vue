@@ -9,8 +9,8 @@
                 <span class="my-2 cursor-pointer" @click="goToProfile()">Profile</span>
 				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="myStudents()">My Students</span>
 				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="newCourse()">New Course</span>
+				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="CourseList()">Course List</span>
 				<span class="my-2 cursor-pointer" @click="logout()">Logout</span>
-				<!-- <span>{{loggedUser.role}}</span> -->
             </div>
         </div>
 		<div class="flex w-full">
@@ -67,7 +67,10 @@ export default {
 		},
 		myStudents() {
 			this.$router.push('/member-list');
-		}
+		},
+		CourseList() {
+			this.$router.push('course-list')
+		},
 	},
 	computed: {
 		loggedUser() {

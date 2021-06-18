@@ -1,7 +1,7 @@
 <template>
-	<div class="user-home flex-col flex w-full">
+	<div class="professor-home flex-col flex w-full">
 		<div class="flex border-b py-4 px-4 w-full text-xl font-bold">
-			<span>Courses List</span>
+			<span>All Courses</span>
 		</div>
 		<div class="flex w-full h-full py-16 pl-5">
             <div class="relative h-full w-3/4">
@@ -17,7 +17,7 @@
 import simpleTable from '../../components/shared/SimpleTable';
 import ModalMixin from '../../mixins/ModalMixin';
 export default {
-	name: "user-home",
+	name: "professor-home",
 	components: {
 		simpleTable,
 	},
@@ -27,11 +27,11 @@ export default {
 		};
 	},
 	mixins: [ModalMixin],
-	mounted() {
-		this.fetchCourese();
-	},
+    mounted() {
+        this.fetchCourese();
+    },
 	methods: {
-		fetchCourese() {
+        fetchCourese() {
             this.$store.dispatch('adminStore/fetchAllCourses').then().catch();
         },
 		singleView(item) {
@@ -41,12 +41,12 @@ export default {
 			});
 			this.$router.push({ path: '/course', query: { id: item.id } })
 		}
-	},
+    },
 	computed: {
-		courses() {
+        courses() {
             return this.$store.getters['adminStore/getState']('allCouresList');
         },
-	},
+    },
 	watch: {},
 };
 </script>
