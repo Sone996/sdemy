@@ -3,6 +3,7 @@ const ROUTES = {
     LOGIN: '/login',
     REGISTER: '/register',
     FETCH_ACCOUNT: '/user/session',
+    LOGOUT: '/logout',
 };
 
 class AuthRepo {
@@ -15,7 +16,10 @@ class AuthRepo {
     }
 
     fetchActiveAccount() {
-        return api.get(ROUTES.FETCH_ACCOUNT)
+        return api.get(ROUTES.FETCH_ACCOUNT);
+    }
+    logout() {
+        return api.post(ROUTES.LOGOUT);
     }
 }
 

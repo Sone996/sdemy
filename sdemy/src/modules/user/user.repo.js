@@ -1,9 +1,13 @@
 
 import { api } from '../../api/api';
 const ROUTES = {
+    USERS: '/users',
 };
 
-class MemberProfileRepo {
+class UserRepo {
+    goProfile(id) {
+        return api.get(`${ROUTES.USERS}/${id}`);
+    }
 }
 
-export const memberProfileRepo = new MemberProfileRepo();
+export const userRepo = new UserRepo();

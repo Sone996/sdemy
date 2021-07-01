@@ -1,48 +1,39 @@
 <template>
-<div class="course flex flex-col w-full">
-    <div class="flex items-start py-4 px-4 border-r text-xl font-bold h-1/2 border-b">
-        <div class="flex flex-col w-1/3 items-start">
+<div class="course flex w-full">
+    <div class="flex flex-col w-1/3 items-start py-4 px-4 border-r text-xl font-bold border-b">
+        <div class="flex flex-col w-full items-start">
             <span>Name: {{course ? course.name : ''}}</span>
             <span>Price: {{course ? course.price : ''}}</span>
         </div>
-        <div class="flex w-3/4 border whitespace-pre-line h-full overflow-y-auto mb-4">
+        <div class="flex border whitespace-pre-line h-full overflow-y-auto mb-4">
             <span>{{ course ? course.description : "" }}</span>
         </div>
     </div>
-    <div class="flex flex-col h-1/2">
-        <!-- set this for admin view, for user should be comments and make components -->
-        <span>Students on this course</span>
-        <simple-table :model='model' :titles='titles'></simple-table>
+    <div v-if="loggedUser.role === 'teacher'" class="flex flex-col items-center w-2/3">
+        <my-students-list></my-students-list>
+    </div>
+    <div v-else>
+        <div class="flex flex-col items-center w-2/3">
+            <span>WIP</span>
+        </div>
     </div>
 </div>
 </template>
 
 <script>
 import ModalMixin from '../../mixins/ModalMixin';
-import simpleTable from '../../components/shared/SimpleTable.vue';
+import {notificationMsg} from "../../services/BaseServices";
+// for porfessor
+import myStudentsList from '../../components/professorComponents/SingelCourseComponent';
+// for student
 
-import {
-    notificationMsg
-} from "../../services/BaseServices";
 export default {
     name: 'course',
     components: {
-        simpleTable,
+        myStudentsList,
     },
     data() {
-        return {
-            model: [
-                { name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-            ],
-			titles: ['Name', 'Title', 'Role', 'Email', 'Edit', 'Delete'],
-        };
+        return {};
     },
     mixins: [ModalMixin],
     mounted() {
@@ -75,7 +66,10 @@ export default {
     computed: {
         course() {
             return this.$store.getters['adminStore/getState']('singleCours');
-        }
+        },
+        loggedUser() {
+            return this.$store.getters["authStore/getState"]("loggedUser");
+        },
     },
     watch: {},
 };

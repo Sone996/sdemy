@@ -1,10 +1,14 @@
 <template>
-  <div class="professor-profile">professor profile</div>
+  <div class="professor-profile-component">
+      <div class="flex text-xl">
+          <span>My students</span>
+      </div>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'professor-profile',
+    name: 'professor-profile-component',
     components: {},
     data() {
       return {};

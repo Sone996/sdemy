@@ -13,6 +13,9 @@ class AuthService {
     fetchActiveAccount() {
         return authRepo.fetchActiveAccount();
     }
+    logout() {
+        return authRepo.logout();
+    }
 }
 
 export const authService = new AuthService();

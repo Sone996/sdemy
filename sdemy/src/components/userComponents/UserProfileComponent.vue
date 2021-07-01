@@ -1,10 +1,14 @@
 <template>
-  <div class="member-profile">member profile</div>
+  <div class="user-profile-component">
+      <div class="flex text-xl">
+          <span>My courses</span>
+      </div>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'member-profile',
+    name: 'user-profile-component',
     components: {},
     data() {
       return {};

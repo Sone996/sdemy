@@ -55,12 +55,19 @@ export default {
 			}
 		},
 		goToProfile() {
-			if(this.loggedUser.role === 'teacher') {
-				this.$router.push('/professor-profile');
-			}
-			if(this.loggedUser.role === 'student') {
-				this.$router.push('/member-profile')
-			}
+			this.$store.commit('appStore/setState', {
+					prop: 'loader',
+					value: true
+				})
+			this.$store.dispatch('userStore/goProfile', this.loggedUser.id)
+				.then(res => {
+					this.$router.push({ path: '/profile', query: { id: res.data.id } })
+				}).catch(err => {
+					this.$store.commit('appStore/setState', {
+						prop: 'loader',
+						value: false
+					})
+				});
 		},
 		newCourse() {
 			this.$router.push('/new-course');

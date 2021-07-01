@@ -22,16 +22,6 @@ const routes = [
 				component: () =>
 					import(/* webpackChunkName: "user-home" */ "@/views/userViews/UserHome"),
 			},
-			{
-				path: "/member-profile",
-				name: "member-profile",
-				beforeEnter: routerService.routerGuards,
-				meta: {
-				  allowedRoles: [ROLES.student],
-				},
-				component: () =>
-					import(/* webpackChunkName: "member-profile" */ "@/views/userViews/UserProfile"),
-			},
 			// END :: user pages
 
 			// professor pages
@@ -56,16 +46,6 @@ const routes = [
 					import(/* webpackChunkName: "member-list" */ "@/views/professorViews/MemberList"),
 			},
 			{
-				path: "/professor-profile",
-				name: "professor-profile",
-				beforeEnter: routerService.routerGuards,
-				meta: {
-				  allowedRoles: [ROLES.professor],
-				},
-				component: () =>
-					import(/* webpackChunkName: "professor-profile" */ "@/views/professorViews/ProfessorProfile"),
-			},
-			{
 				path: "/new-course",
 				name: "new-course",
 				beforeEnter: routerService.routerGuards,
@@ -86,6 +66,16 @@ const routes = [
 				},
 				component: () =>
 					import(/* webpackChunkName: "course" */ "@/views/shared/SingleCourse"),
+			},
+			{
+				path: "/profile",
+				name: "profile",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLES.professor, ROLES.student],
+				},
+				component: () =>
+					import(/* webpackChunkName: "profile" */ "@/views/shared/Profile"),
 			},
 			{
 				path: "/course-list",
