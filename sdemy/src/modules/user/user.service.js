@@ -5,6 +5,14 @@ class UserService {
     goProfile(id) {
         return userRepo.goProfile(id);
     }
+
+    fetchNotCompletedCourses() {
+        return userRepo.fetchNotCompletedCourses();
+    }
+
+    fetchCompletedCourses(id) {
+        return userRepo.fetchCompletedCourses(id);
+    }
 }
 
 export const userService = new UserService();

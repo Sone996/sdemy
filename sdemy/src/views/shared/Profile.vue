@@ -1,12 +1,12 @@
 <template>
-	<div class="profile flex flex-col w-full">
-		<div class="flex flex-col items-start p-6 text-xl border-b">
+	<div class="profile flex flex-col w-full h-full">
+		<div v-if="userData" class="flex flex-col items-start p-6 text-xl border-b">
 			<span>Name: {{userData.name}}</span>
 			<span>Surname: {{userData.surname}}</span>
 			<span>Email: {{userData.email}}</span>
 			<span>Role: {{userData.role}}</span>
 		</div>
-		<div class="flex flex-col">
+		<div class="flex flex-col h-full">
 			<Professor-profile-component v-if="loggedUser.role === 'teacher'"></Professor-profile-component>
 			<User-profile-component v-else></User-profile-component>
 		</div>

@@ -23,16 +23,32 @@ export default {
 	},
 	data() {
 		return {
-			titles: ['Id', 'Name', 'Average Mark', 'Price'],
+			titles: ['Id', 'Course Name', 'Teacher Name', 'Average Mark', 'Price'],
 		};
 	},
 	mixins: [ModalMixin],
 	mounted() {
+		this.$store.commit('appStore/setState', {
+            prop: 'loader',
+            value: true
+        })
 		this.fetchCourese();
 	},
 	methods: {
 		fetchCourese() {
-            this.$store.dispatch('adminStore/fetchAllCourses').then().catch();
+            this.$store.dispatch('userStore/fetchNotCompletedCourses').then( res => {
+				this.$store.commit('appStore/setState', {
+                        prop: 'loader',
+                        value: false
+                    })
+			}
+			).catch( err => {
+				this.$store.commit('appStore/setState', {
+                        prop: 'loader',
+                        value: false
+                    })
+			}
+			);
         },
 		singleView(item) {
 			this.$store.commit('appStore/setState', {
@@ -44,7 +60,7 @@ export default {
 	},
 	computed: {
 		courses() {
-            return this.$store.getters['adminStore/getState']('allCouresList');
+            return this.$store.getters['userStore/getState']('notCompletedCourses');
         },
 	},
 	watch: {},
