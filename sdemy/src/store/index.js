@@ -10,6 +10,7 @@ import adminStore from './admin/adminStore';
 // general
 import authStore from './authStore';
 import appStore from './appStore';
+import courseStore from './course/courseStore';
 // END :: general
 
 Vue.use(Vuex);
@@ -19,7 +20,8 @@ let storeInstance = new Vuex.Store({
 		userStore,
 		adminStore,
 		authStore,
-		appStore
+		appStore,
+		courseStore
 	},
 	state: {
 	},

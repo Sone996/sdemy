@@ -28,7 +28,7 @@ export default {
 				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com', course: 'CSS' },
                 { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com', course: 'JS' },
             ],
-			titles: ['Name', 'Title', 'Role', 'Email', 'Course', 'Edit', 'Delete'],
+			titles: ['Name', 'Title', 'Role', 'Email', 'Course'],
 		};
 	},
 	mounted() {},

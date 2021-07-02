@@ -1,7 +1,7 @@
 <template>
-    <div class="single-course-component">
-        <span>Students on this course</span>
-        <simple-table :model='model' :titles='titles'></simple-table>
+    <div class="single-course-component flex flex-col text-xl">
+        <span class="py-4">Students on this course</span>
+        <simple-table :model='data' :titles='titles'></simple-table>
     </div>
 </template>
 
@@ -14,18 +14,14 @@ import simpleTable from '../../components/shared/SimpleTable.vue';
     },
     data() {
       return {
-        model: [
-            { name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-            { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-			{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-            { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-			{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-            { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-			{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
-            { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com' },
-        ],
-		titles: ['Name', 'Title', 'Role', 'Email'],
+		titles: ['User Id', 'User', 'Course Start Date', 'Complete'],
       };
+    },
+    props: {
+        data: {
+            type: Object | null,
+            required: true,
+        },
     },
     methods: {},
     computed: {},

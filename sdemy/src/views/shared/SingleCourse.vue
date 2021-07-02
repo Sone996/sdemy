@@ -1,6 +1,6 @@
 <template>
 <div class="course flex w-full">
-    <div class="flex flex-col w-1/3 items-start py-4 px-4 border-r text-xl font-bold border-b">
+    <div v-if="course" class="flex flex-col w-1/3 items-start py-4 px-4 border-r text-xl font-bold border-b">
         <div class="flex flex-col w-full items-start">
             <span>Name: {{course ? course.name : ''}}</span>
             <span>Price: {{course ? course.price : ''}}</span>
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div v-if="loggedUser.role === 'teacher'" class="flex flex-col items-center w-2/3">
-        <my-students-list></my-students-list>
+        <my-students-list :data='usersOnCourseList'></my-students-list>
     </div>
     <div v-else>
         <div class="flex flex-col items-center w-2/3">
@@ -47,10 +47,7 @@ export default {
             let id = this.$route.query.id;
             this.$store.dispatch('adminStore/fetchSingleCours', id)
                 .then(() => {
-                    this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
+                    this.studentsOnCourse(id);
                 }).catch(err => {
                     this.$store.commit('appStore/setState', {
                         prop: 'loader',
@@ -62,6 +59,21 @@ export default {
                     });
                 })
         },
+        studentsOnCourse(id) {
+            this.$store.dispatch('courseStore/studentsOnCourse', {course_id: id})
+            .then(res => {
+                this.$store.commit('appStore/setState', {
+                        prop: 'loader',
+                        value: false
+                    })
+            }).catch( err => {
+                this.$store.commit('appStore/setState', {
+                        prop: 'loader',
+                        value: false
+                    })
+                console.log('eeeeeeeeeeeeeeeeeeee ', err)
+            });
+        },
     },
     computed: {
         course() {
@@ -69,6 +81,9 @@ export default {
         },
         loggedUser() {
             return this.$store.getters["authStore/getState"]("loggedUser");
+        },
+        usersOnCourseList() {
+            return this.$store.getters["courseStore/getState"]('studentsOnCourseList');
         },
     },
     watch: {},
