@@ -55,7 +55,7 @@ export default {
 				prop: 'loader',
 				value: true
 			});
-			this.$router.push({ path: '/course', query: { id: item.id } })
+			this.$router.push({ path: '/course', query: { id: item.course_id } })
 		}
 	},
 	computed: {

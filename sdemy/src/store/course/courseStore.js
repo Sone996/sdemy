@@ -41,6 +41,14 @@ const courseStore = {
 				return Promise.reject(error);
 			}
 		},
+		async buyCourse({}, payload) {
+			try {
+				const res = await courseService.buyCourse(payload);
+				return Promise.resolve(res);	
+			} catch (error) {
+				return Promise.reject(error);
+			}
+		}
 	}
 };
 

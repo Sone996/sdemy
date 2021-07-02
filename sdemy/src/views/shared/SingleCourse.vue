@@ -10,12 +10,10 @@
         </div>
     </div>
     <div v-if="loggedUser.role === 'teacher'" class="flex flex-col items-center w-2/3">
-        <my-students-list :data='usersOnCourseList'></my-students-list>
+        <My-students-list :data='usersOnCourseList'></My-students-list>
     </div>
-    <div v-else>
-        <div class="flex flex-col items-center w-2/3">
-            <span>WIP</span>
-        </div>
+    <div v-else class="flex flex-col items-center w-full">
+        <Student-part :data="course"></Student-part>
     </div>
 </div>
 </template>
@@ -24,13 +22,14 @@
 import ModalMixin from '../../mixins/ModalMixin';
 import {notificationMsg} from "../../services/BaseServices";
 // for porfessor
-import myStudentsList from '../../components/professorComponents/SingelCourseComponent';
+import MyStudentsList from '../../components/professorComponents/SingelCourseComponent';
 // for student
-
+import StudentPart from '../../components/userComponents/SingleCourseStudentComponent';
 export default {
     name: 'course',
     components: {
-        myStudentsList,
+        MyStudentsList,
+        StudentPart,
     },
     data() {
         return {};
