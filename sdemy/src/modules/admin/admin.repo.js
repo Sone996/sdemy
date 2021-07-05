@@ -30,8 +30,15 @@ class AdminRepo {
     }
 
     fetchAplicationRequests() {
-        const URL = `${ROUTES.TESACHER}${ROUTES.REQUEST_COURSE}`;
-        // return api.get(URL);
+        const URL = `${ROUTES.TEACHER}${ROUTES.REQUEST_COURSE}`;
+        return api.get(URL);
+    }
+
+    resolveRequest(data) {
+        console.log(data)
+        const URL = `${ROUTES.TEACHER}${ROUTES.REQUEST_COURSE}/${data.courseId}`;
+        console.log(URL)
+        return api.post(URL, data.data);
     }
 }
 

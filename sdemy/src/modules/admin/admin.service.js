@@ -1,3 +1,4 @@
+import { omit } from "lodash";
 import { adminRepo } from "./admin.repo";
 //import { TOKEN_LS_NAME } from "../../constants/constants";
 
@@ -24,6 +25,15 @@ class AdminService {
 
     fetchAplicationRequests() {
         return adminRepo.fetchAplicationRequests();
+    }
+
+    resolveRequest(data) {
+        console.log(data.course_id)
+        // return adminRepo.resolveRequest(data)
+        return adminRepo.resolveRequest({
+            courseId: data.course_id,
+            data: omit(data, ['course_id']) 
+        });
     }
 }
 

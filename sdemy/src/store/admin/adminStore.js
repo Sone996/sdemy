@@ -8,6 +8,7 @@ const adminStore = {
 		myCourses: null,
 		allCouresList: null,
 		myStudents: null,
+		aplicationRequests: null,
 	},
 	getters: {
 		getState: (state) => (prop) => {
@@ -63,6 +64,20 @@ const adminStore = {
 			})
 			state.myStudents = myStudents;
 		},
+		parseAplicationRequests: (state, aplicationRequests) => {
+			if(!aplicationRequests) {
+                return;
+            }
+			aplicationRequests.forEach((aplication, i) => {
+				// aplicationRequests[i] = omit(aplication, ['complete', 'course_id', 'description']);
+				aplicationRequests[i] = {
+					student_id: aplicationRequests[i].student_id,
+					course_id: aplicationRequests[i].course_id,
+					accepted: aplicationRequests[i].accepted,
+				}
+			});
+			state.aplicationRequests = aplicationRequests;
+		},
 	},
 	actions: {
 		async createCourse({commit}, payload) {
@@ -116,8 +131,15 @@ const adminStore = {
 		async fetchAplicationRequests({commit}) {
 			try {
 				const res = await adminService.fetchAplicationRequests();
-				// commit('parseAplicationRequests', res.data)
-				console.log(res.data)
+				commit('parseAplicationRequests', res.data)
+				return Promise.resolve(res);
+			} catch (error) {
+				return Promise.reject(error);
+			}
+		},
+		async resolveRequest({}, payload) {
+			try {
+				const res = adminService.resolveRequest(payload);
 				return Promise.resolve(res);
 			} catch (error) {
 				return Promise.reject(error);

@@ -5,10 +5,10 @@
 		<!-- modals -->
 		<!-- <span class="button bg-green" @click="openNotificationModal()">test</span> -->
 		<div v-if="showModal" class="fixed top-0 left-0 h-screen w-screen flex" style="z-index: 2">
-    		<div class="flex items-center justify-center w-full">
+    		<div class="modal flex items-center justify-center w-full">
     			<component :is="getModalObj.name" :model="getModalObj.data" @closeModal="closeModal" />
     		</div>
-    		<!-- <div v-if="activeOverlay" class="fixed top-0 left-0 modal-overlay h-screen w-screen flex"></div> -->
+    		<div v-if="activeOverlay" class="fixed top-0 left-0 modal-overlay h-screen w-screen flex"></div>
     	</div>
 	</div>
 </template>
@@ -17,19 +17,19 @@
 import ModalMixin from './mixins/ModalMixin';
 import loader from './components/shared/Lodaer';
 import notificationModal from './components/modals/NotificationModal';
+import requrestAcceptModal from './components/modals/RequestAcceptModal';
 import { TOKEN_LS_NAME } from "@/constants/constants";
 export default {
 	name: "app",
 	components: {
 		loader,
 		notificationModal,
+		requrestAcceptModal,
 	},
 	data() {
 		return {};
 	},
-	mounted(){
-		//console.log('processss', process.env.VUE_APP_API_PATH)
-	},
+	mounted(){},
 	mixins: [ModalMixin],
 	methods: {
 		closeModal() {
@@ -41,14 +41,11 @@ export default {
                 modalName: null,
                 modalData: null
             });
+			this.$store.commit('appStore/setState', {
+				prop: 'activeOverlay',
+				value: false,
+			})
         },
-		// how to open notification
-		// openNotificationModal() {
-		// 	this.openModal('notification-modal', {
-		// 		errMsg: 'error',
-		// 		successMsg: null,
-		// 	})
-		// },
 	},
 	computed: {
 		toggleLoader() {
@@ -77,6 +74,10 @@ export default {
 	color: #2c3e50;
 }
 .modal-overlay{
-    background-color: rgba(0, 0, 0, .9);
+	z-index: 1;
+    background-color: rgba(0, 0, 0, .6);
+  }
+  .modal{
+	  z-index: 2;
   }
 </style>
