@@ -7,6 +7,7 @@ const adminStore = {
 		singleCours: null,
 		myCourses: null,
 		allCouresList: null,
+		myStudents: null,
 	},
 	getters: {
 		getState: (state) => (prop) => {
@@ -47,15 +48,26 @@ const adminStore = {
 			})
 			state.myCourses = myCourses;
 		},
+		parseMyStudents: (state, myStudents) => {
+			if(!myStudents) {
+                return;
+            }
+			myStudents.forEach((student, i) => {
+				myStudents[i] = omit(student, ['complete', 'course_id', 'description']);
+				myStudents[i] = {
+					user_id: myStudents[i].user_id,
+					user: myStudents[i].user,
+					course_name: myStudents[i].course_name,
+					course_start_date: myStudents[i].course_start_date
+				}
+			})
+			state.myStudents = myStudents;
+		},
 	},
 	actions: {
 		async createCourse({commit}, payload) {
 			try{
 				const res = await adminService.createCourse(payload);
-				// commit('setState', {
-				// 	prop: 'singleCours',
-				// 	value: result.data
-				// });
 				return Promise.resolve(res);
 
 			} catch(error){
@@ -77,10 +89,6 @@ const adminStore = {
 		async fetchAllCourses({commit}) {
 			try{
 				const res = await adminService.fetchAllCourses();
-				// commit('setState', {
-				// 	prop: 'allCouresList',
-				// 	value: res.data
-				// });
 				commit('parseAllCOurses', res.data);
 				return Promise.resolve(res);
 			} catch(error) {
@@ -88,10 +96,20 @@ const adminStore = {
 			}
 		},
 		async fetchMyCourses({commit}, payload) {
-			try{
+			try {
 				const res = await adminService.fetchMyCourses(payload);
 				commit('parseMyCourses', res.data);
+				return Promise.resolve(res);
 			} catch(error) {
+				return Promise.reject(error);
+			}
+		},
+		async fetchMyStudents({commit}) {
+			try {
+				const res = await adminService.fetchMyStudents();
+				commit('parseMyStudents', res.data);
+				return Promise.resolve(res);
+			} catch (error) {
 				return Promise.reject(error);
 			}
 		}

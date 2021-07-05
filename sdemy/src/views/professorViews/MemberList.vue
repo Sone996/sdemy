@@ -4,7 +4,7 @@
 			<span>My Students</span>
 		</div>
 		<div class="flex w-full justify-center mt-16">
-			<simple-table :model='model' :titles='titles'></simple-table>
+			<simple-table @singleView="singleView" :model='myStudents' :titles='titles'></simple-table>
 		</div>
 	</div>
 </template>
@@ -18,22 +18,43 @@ export default {
 	},
 	data() {
 		return {
-			model: [
-                { name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com', course: 'JS' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com', course: 'Vue' },
-				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com', course: 'JS' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com', course: 'JS' },
-				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com', course: 'Vue' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com', course: 'JS' },
-				{ name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com', course: 'CSS' },
-                { name: 'Cody Fisher', title: 'Product Directives Officer', role: 'Owner', email: 'cody.fisher@example.com', course: 'JS' },
-            ],
-			titles: ['Name', 'Title', 'Role', 'Email', 'Course'],
+			titles: ['Id', 'Student', 'Course', 'Date of Start'],
 		};
 	},
-	mounted() {},
-	methods: {},
-	computed: {},
+	mounted() {
+		this.fetchMyStudents();
+	},
+	methods: {
+		fetchMyStudents() {
+			this.$store.commit('appStore/setState', {
+						prop: 'loader',
+						value: true
+					})
+            this.$store.dispatch('adminStore/fetchMyStudents').then(() => {
+                this.$store.commit('appStore/setState', {
+						prop: 'loader',
+						value: false
+					})
+            }).catch(() => {
+                this.$store.commit('appStore/setState', {
+						prop: 'loader',
+						value: false
+					})
+            });
+		},
+		singleView(item) {
+			this.$store.commit('appStore/setState', {
+				prop: 'loader',
+				value: true
+			});
+			this.$router.push({ path: '/profile', query: { id: item.user_id } })
+		}
+	},
+	computed: {
+		myStudents() {
+			return this.$store.getters['adminStore/getState']('myStudents');
+		}
+	},
 	watch: {},
 };
 </script>
