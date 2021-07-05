@@ -35,26 +35,14 @@ import { notificationMsg } from "../../services/BaseServices";
     mixins: [ModalMixin],
     methods: {
         buyCourse() {
-            this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: true
-					})
             this.form.id = this.data.id
             this.$store.dispatch('courseStore/buyCourse', this.form).then((res) => {
                 this.openModal('notification-modal', {
 					errMsg: null,
 					successMsg: notificationMsg(res, 'COURSE_APPLYED_SUCCESS'),
 				});
-                this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					})
                 this.form.comment = null;
             }).catch((err) => {
-                this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					})
 				this.openModal('notification-modal', {
 					errMsg: notificationMsg(err),
 					successMsg: null,

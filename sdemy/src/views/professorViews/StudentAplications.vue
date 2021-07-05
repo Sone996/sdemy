@@ -1,8 +1,12 @@
 <template>
-	<div class="member-list flex-col flex w-full">
+	<div class="student-aplications flex-col flex w-full">
 		<div class="flex border-b py-4 px-4 w-full text-xl font-bold">
-			<span>My Students</span>
+			<span>Students</span>
 		</div>
+        <div class="flex w-full mt-4">
+            <span class="button bg-darkGreen ml-4">Active</span>
+            <span class="button bg-darkGreen ml-4">Inactive</span>
+        </div>
 		<div class="flex w-full justify-center mt-16">
 			<simple-table @singleView="singleView" :model='myStudents' :titles='titles'></simple-table>
 		</div>
@@ -12,7 +16,7 @@
 <script>
 import simpleTable from '../../components/shared/SimpleTable';
 export default {
-	name: "member-list",
+	name: "student-aplications",
 	components: {
 		simpleTable,
 	},
@@ -26,7 +30,7 @@ export default {
 	},
 	methods: {
 		fetchMyStudents() {
-            this.$store.dispatch('adminStore/fetchMyStudents').then(() => {
+            this.$store.dispatch('adminStore/fetchAplicationRequests').then(() => {
             }).catch(() => {
             });
 		},

@@ -3,6 +3,7 @@ const ROUTES = {
     COURSES: '/courses',
     TEACHER: '/teacher',
     STUDENTS: '/students',
+    REQUEST_COURSE: '/request_course',
 };
 
 class AdminRepo {
@@ -26,6 +27,11 @@ class AdminRepo {
 
     fetchMyStudents() {
         return api.get(ROUTES.STUDENTS);
+    }
+
+    fetchAplicationRequests() {
+        const URL = `${ROUTES.TESACHER}${ROUTES.REQUEST_COURSE}`;
+        // return api.get(URL);
     }
 }
 

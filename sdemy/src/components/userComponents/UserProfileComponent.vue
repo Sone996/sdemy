@@ -30,26 +30,14 @@ export default {
 	},
 	mixins: [ModalMixin],
 	mounted() {
-		this.$store.commit('appStore/setState', {
-            prop: 'loader',
-            value: true
-        })
 		this.fetchCompletedCourese();
 	},
 	methods: {
 		fetchCompletedCourese() {
 			let id = this.loggedUser.id;
 			this.$store.dispatch('userStore/fetchCompletedCourses', id).then((res) => {
-				this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
 			})
 			.catch((err) => {
-				this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
 			})
 		}
 	},

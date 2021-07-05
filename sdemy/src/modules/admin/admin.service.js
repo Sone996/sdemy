@@ -21,6 +21,10 @@ class AdminService {
     fetchMyStudents() {
         return adminRepo.fetchMyStudents();
     }
+
+    fetchAplicationRequests() {
+        return adminRepo.fetchAplicationRequests();
+    }
 }
 
 export const adminService = new AdminService();

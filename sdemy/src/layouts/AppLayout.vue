@@ -10,6 +10,7 @@
 				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="myStudents()">My Students</span>
 				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="newCourse()">New Course</span>
 				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="CourseList()">Course List</span>
+				<span v-if="loggedUser && loggedUser.role === 'teacher'" class="my-2 cursor-pointer" @click="studentAplications()">Student aplications</span>
 				<span class="my-2 cursor-pointer" @click="logout()">Logout</span>
             </div>
         </div>
@@ -32,10 +33,6 @@ export default {
 		if(!localStorage.getItem(TOKEN_LS_NAME)) {
 			this.$router.push('/login');
 		} 
-		this.$store.commit('appStore/setState', {
-				prop: 'loader',
-				value: false
-			})
 	},
 	methods: {
 		logout() {
@@ -55,18 +52,10 @@ export default {
 			}
 		},
 		goToProfile() {
-			this.$store.commit('appStore/setState', {
-					prop: 'loader',
-					value: true
-				})
 			this.$store.dispatch('userStore/goProfile', this.loggedUser.id)
 				.then(res => {
 					this.$router.push({ path: '/profile', query: { id: res.data.id } })
 				}).catch(err => {
-					this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					})
 				});
 		},
 		newCourse() {
@@ -78,6 +67,9 @@ export default {
 		CourseList() {
 			this.$router.push('course-list')
 		},
+		studentAplications() {
+			this.$router.push('student-aplications');
+		}
 	},
 	computed: {
 		loggedUser() {

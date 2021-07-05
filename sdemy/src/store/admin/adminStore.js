@@ -112,6 +112,16 @@ const adminStore = {
 			} catch (error) {
 				return Promise.reject(error);
 			}
+		},
+		async fetchAplicationRequests({commit}) {
+			try {
+				const res = await adminService.fetchAplicationRequests();
+				// commit('parseAplicationRequests', res.data)
+				console.log(res.data)
+				return Promise.resolve(res);
+			} catch (error) {
+				return Promise.reject(error);
+			}
 		}
 	}
 };

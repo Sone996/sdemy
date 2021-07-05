@@ -40,10 +40,6 @@ export default {
 	mixins: [ModalMixin],
 	methods: {
 		createCourse() {
-			this.$store.commit('appStore/setState', {
-					prop: 'loader',
-					value: true
-				})
 			this.$store.dispatch('adminStore/createCourse', this.form)
 			.then((res) => {
 				this.openModal('notification-modal', {
@@ -53,10 +49,6 @@ export default {
 				this.$router.push({ path: '/course', query: { id: res.data.id } })
 			})
 			.catch((err) => {
-				this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					})
 				this.openModal('notification-modal', {
 					errMsg: notificationMsg(err),
 					successMsg: null,

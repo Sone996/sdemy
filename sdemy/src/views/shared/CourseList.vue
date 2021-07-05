@@ -35,10 +35,6 @@ export default {
             this.$store.dispatch('adminStore/fetchAllCourses').then().catch();
         },
 		singleView(item) {
-			this.$store.commit('appStore/setState', {
-				prop: 'loader',
-				value: true
-			});
 			this.$router.push({ path: '/course', query: { id: item.id } })
 		}
     },

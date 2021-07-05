@@ -48,10 +48,6 @@ export default {
                 .then(() => {
                     this.studentsOnCourse(id);
                 }).catch(err => {
-                    this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
                     this.openModal('notification-modal', {
                         errMsg: notificationMsg(err),
                         successMsg: null,
@@ -61,15 +57,7 @@ export default {
         studentsOnCourse(id) {
             this.$store.dispatch('courseStore/studentsOnCourse', {course_id: id})
             .then(res => {
-                this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
             }).catch( err => {
-                this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
                 console.log('eeeeeeeeeeeeeeeeeeee ', err)
             });
         },

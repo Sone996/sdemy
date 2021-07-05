@@ -55,6 +55,16 @@ const routes = [
 				component: () =>
 					import(/* webpackChunkName: "new-course" */ "@/views/professorViews/NewCourse"),
 			},
+			{
+				path: "/student-aplications",
+				name: "student-aplications",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLES.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "student-aplications" */ "@/views/professorViews/StudentAplications"),
+			},
 			// END :: professor pages
 			// shared pages
 			{

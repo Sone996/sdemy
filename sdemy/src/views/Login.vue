@@ -84,10 +84,6 @@ export default {
 	},
 	methods: {
 		loginAction() {
-			this.$store.commit('appStore/setState', {
-				prop: 'loader',
-				value: true
-			})
 			this.$store.dispatch('authStore/login', this.login)
 			.then((res) => {
 				this.openModal('notification-modal', {
@@ -105,10 +101,6 @@ export default {
 				}
 			})
 			.catch((err) => {
-				this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					})
 				this.openModal('notification-modal', {
 					errMsg: notificationMsg(err),
 					successMsg: null,
@@ -119,10 +111,6 @@ export default {
 			this.register = !this.register;
 		},
 		registerAction() {
-			this.$store.commit('appStore/setState', {
-				prop: 'loader',
-				value: true
-			})
 			this.login.role = this.role.value;
 			this.$store.dispatch('authStore/register', this.login)
 			.then((res) => {
@@ -134,10 +122,6 @@ export default {
 				this.loginAction();
 			})
 			.catch((err) => {
-				this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					})
 				this.openModal('notification-modal', {
 					errMsg: notificationMsg(err),
 					successMsg: null,

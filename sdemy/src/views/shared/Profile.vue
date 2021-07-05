@@ -36,18 +36,9 @@ export default {
 		initLoad() {
 			if(!this.userData) {
 				this.$store.dispatch('userStore/goProfile', this.loggedUser.id).then(() => {
-					this.closeLoader();
 				}).catch(() => {
-					this.closeLoader();
 				})
 			}
-			this.closeLoader();
-		},
-		closeLoader() {
-			this.$store.commit('appStore/setState', {
-					prop: 'loader',
-					value: false
-				})
 		},
 	},
 	computed: {

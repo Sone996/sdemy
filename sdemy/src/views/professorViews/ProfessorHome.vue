@@ -29,25 +29,13 @@ export default {
 	},
 	mixins: [ModalMixin],
     mounted() {
-		this.$store.commit('appStore/setState', {
-				prop: 'loader',
-				value: true
-			});
 		this.loggedUser ? this.fetchMyCourses(this.loggedUser.id) : null;
 	},
 	methods: {
 		fetchMyCourses(id) {
 			this.$store.dispatch('adminStore/fetchMyCourses', id).then(res => {
-				this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					});
 			})
 			.catch(err => {
-				this.$store.commit('appStore/setState', {
-						prop: 'loader',
-						value: false
-					});
 				this.openModal('notification-modal', {
 					errMsg: notificationMsg(err),
 					successMsg: null,
@@ -56,10 +44,6 @@ export default {
 			);
 		},
 		singleView(item) {
-			this.$store.commit('appStore/setState', {
-				prop: 'loader',
-				value: true
-			});
 			this.$router.push({ path: '/course', query: { id: item.id } })
 		}
 	},

@@ -28,33 +28,17 @@ export default {
 	},
 	mixins: [ModalMixin],
 	mounted() {
-		this.$store.commit('appStore/setState', {
-            prop: 'loader',
-            value: true
-        })
 		this.fetchCourese();
 	},
 	methods: {
 		fetchCourese() {
             this.$store.dispatch('userStore/fetchNotCompletedCourses').then( res => {
-				this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
 			}
 			).catch( err => {
-				this.$store.commit('appStore/setState', {
-                        prop: 'loader',
-                        value: false
-                    })
 			}
 			);
         },
 		singleView(item) {
-			this.$store.commit('appStore/setState', {
-				prop: 'loader',
-				value: true
-			});
 			this.$router.push({ path: '/course', query: { id: item.course_id } })
 		}
 	},
