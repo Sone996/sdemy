@@ -78,13 +78,18 @@ export default {
 		},
 		singleView(item) {
 			if(item.accepted === true) {
-				return;
+				this.$store.commit('appStore/setState', {
+					prop: 'activeOverlay',
+					value: true,
+				})
+				this.openModal('finishing-course-modal', item);
+			} else {
+				this.$store.commit('appStore/setState', {
+					prop: 'activeOverlay',
+					value: true,
+				})
+				this.openModal('requrest-accept-modal', item);
 			}
-			this.$store.commit('appStore/setState', {
-				prop: 'activeOverlay',
-				value: true,
-			})
-			this.openModal('requrest-accept-modal', item);
 		}
 	},
 	computed: {

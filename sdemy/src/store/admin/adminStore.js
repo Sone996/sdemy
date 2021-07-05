@@ -144,6 +144,14 @@ const adminStore = {
 			} catch (error) {
 				return Promise.reject(error);
 			}
+		},
+		async completeCourse({}, payload) {
+			try {
+				const res = adminService.completeCourse(payload);
+				return Promise.resolve(res);
+			} catch (error) {
+				return Promise.reject(error);
+			}
 		}
 	}
 };

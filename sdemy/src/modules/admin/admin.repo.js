@@ -1,8 +1,10 @@
 import { api } from '../../api/api';
 const ROUTES = {
+    COURSE: '/course',
     COURSES: '/courses',
     TEACHER: '/teacher',
     STUDENTS: '/students',
+    STUDENT: '/student',
     REQUEST_COURSE: '/request_course',
 };
 
@@ -35,10 +37,13 @@ class AdminRepo {
     }
 
     resolveRequest(data) {
-        console.log(data)
         const URL = `${ROUTES.TEACHER}${ROUTES.REQUEST_COURSE}/${data.courseId}`;
-        console.log(URL)
         return api.post(URL, data.data);
+    }
+
+    completeCourse(data) {
+        const URL = `${ROUTES.STUDENT}/${data.userId}${ROUTES.COURSE}/${data.courseId}${ROUTES.TEACHER}/${data.teacherId}`;
+        return api.patch(URL, data.data);
     }
 }
 

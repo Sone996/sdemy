@@ -28,11 +28,18 @@ class AdminService {
     }
 
     resolveRequest(data) {
-        console.log(data.course_id)
-        // return adminRepo.resolveRequest(data)
         return adminRepo.resolveRequest({
             courseId: data.course_id,
             data: omit(data, ['course_id']) 
+        });
+    }
+
+    completeCourse(data) {
+        return adminRepo.completeCourse({
+            courseId: data.courseId,
+            teacherId: data.teacherId,
+            userId: data.userId,
+            data: omit(data, ['courseId', 'teacherId', 'userId'])
         });
     }
 }

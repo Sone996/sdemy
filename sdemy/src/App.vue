@@ -18,6 +18,7 @@ import ModalMixin from './mixins/ModalMixin';
 import loader from './components/shared/Lodaer';
 import notificationModal from './components/modals/NotificationModal';
 import requrestAcceptModal from './components/modals/RequestAcceptModal';
+import finishingCourseModal from './components/modals/FinishingCourseModal';
 import { TOKEN_LS_NAME } from "@/constants/constants";
 export default {
 	name: "app",
@@ -25,6 +26,7 @@ export default {
 		loader,
 		notificationModal,
 		requrestAcceptModal,
+		finishingCourseModal
 	},
 	data() {
 		return {};
